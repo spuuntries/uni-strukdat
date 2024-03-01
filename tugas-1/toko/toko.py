@@ -26,6 +26,7 @@ for item in queue:
 
 for i, t in enumerate(stores):
     print(f"TOKO {i+1} :")
+    t.reverse()
     if t: [print(" ".join(map(str, o))) for o in t]
     else: print(f"TOKO {i+1} SEPI :(")
     print(f"TOKO {i+1} UNTUNG : {sum(map(lambda x: x[1], t))}")
