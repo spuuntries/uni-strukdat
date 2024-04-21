@@ -1,7 +1,4 @@
-# import json
-
-_ = input()
-inputs = list(map(int, input().split()))
+import json
 
 
 def make(val):
@@ -25,10 +22,6 @@ def insert(root, node):
         return
 
 
-tree = make(inputs.pop(0))
-[insert(tree, make(e)) for e in inputs]
-
-
 def findMin(root, current_min=None):
     # Do a DFS to the left-most path
     if not current_min:
@@ -42,11 +35,11 @@ def findMin(root, current_min=None):
 
 def sumLeft(root, queue=[], res=[]):
     if root["left"]:
-        leftLeaf = findMin(root)
+        leftLeafCand = findMin(root)
     else:
-        leftLeaf = None
-    if leftLeaf and leftLeaf not in res:
-        res.append(leftLeaf)
+        leftLeafCand = None
+    if leftLeafCand and not leftLeafCand["right"] and leftLeafCand not in res:
+        res.append(leftLeafCand)
     if root["left"]:
         queue.append(root["left"])
     if root["right"]:
@@ -57,6 +50,13 @@ def sumLeft(root, queue=[], res=[]):
     return sumLeft(nextElem, queue, res)
 
 
-# print(json.dumps(tree, indent=2))
-# print(sumLeft(tree))
-print(sum([e["val"] for e in sumLeft(tree)]))
+if __name__ == "__main__":
+    _ = input()
+    inputs = list(map(int, input().split()))
+
+    tree = make(inputs.pop(0))
+    [insert(tree, make(e)) for e in inputs]
+
+    # print(json.dumps(tree, indent=2))
+    # print(sumLeft(tree))
+    print(sum([e["val"] for e in sumLeft(tree)]))
