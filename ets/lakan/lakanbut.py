@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
 
 def revised_lakan(inputs: list[list[list[int]]], v=False):
-    # Adapted Tio's solution, credit to Tio
+    # Adapted Tio's solution + Revisions from Farhan, credit to Tio & Farhan
     totals = []
 
     for case in inputs:
@@ -18,9 +18,25 @@ def revised_lakan(inputs: list[list[list[int]]], v=False):
         total = 0
 
         while case[0] and case[1]:
-            total += abs(case[0].pop(0) - case[1].pop())
-            if case[0] and case[1]:
-                total += abs(case[0].pop() - case[1].pop(0))
+            x = case[0][0]
+            y = case[1][-1]
+            toadd = abs(x - y)
+
+            topopx = 0
+            topopy = -1
+
+            if toadd < abs(case[0][-1] - case[1][0]):
+                x = case[0][-1]
+                y = case[1][0]
+
+                toadd = abs(x - y)
+
+                topopx = -1
+                topopy = 0
+
+            case[0].pop(topopx)
+            case[1].pop(topopy)
+            total += toadd
         if v:
             print(f"Maksimum total selisihnya {total} poin.")
 
