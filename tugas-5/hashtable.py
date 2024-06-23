@@ -123,6 +123,18 @@ class HashTable:
                 loadfactor,
             )
 
+    def values(self):
+        if self.collision_resolution == "separate_chaining":
+            return [value for chain in self.slots for _, value in chain]
+        else:
+            return [slot[1] for slot in self.slots if slot]
+
+    def keys(self):
+        if self.collision_resolution == "separate_chaining":
+            return [key for chain in self.slots for key, _ in chain]
+        else:
+            return [slot[0] for slot in self.slots if slot]
+
     def __setitem__(self, key, value):
         self.put(key, value)
 
