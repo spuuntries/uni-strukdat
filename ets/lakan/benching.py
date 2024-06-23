@@ -7,7 +7,7 @@ import random
 
 # Generate samples
 sample_size = 100
-input_size = 1000
+input_size = 10
 max_case = 100
 min_case = 4
 
@@ -72,6 +72,10 @@ for inputs in pbar:
     pbar.set_description(
         f"Old Avg: {sum(old_time)/len(old_time):.8f} || New Avg: {sum(rev_time)/len(rev_time):.8f}"
     )
+
+print(samples[0])
+print(old_reses[0])
+print(rev_reses[0])
 
 print(
     tabulate(
